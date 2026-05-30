@@ -7,40 +7,37 @@ A lightweight REST API for managing tasks, built to demonstrate backend developm
 - **FastAPI** — web framework
 - **MongoDB** — database
 - **Motor** — async MongoDB driver
-- **Docker** — containerization
+- **Docker / Docker Compose** — containerization
 - **Uvicorn** — ASGI server
+- **Prometheus** — metrics collection
+- **Grafana** — metrics visualization
 - **AWS EC2** — deployment
 
 ## Run locally
 
-**1. Start MongoDB:**
+Start all services (API + MongoDB + Prometheus + Grafana):
+
 ```bash
-docker-compose up -d
+docker-compose up --build
 ```
 
-**2. Install dependencies:**
-```bash
-pip install -r requirements.txt
-```
-
-**3. Start the server:**
-```bash
-uvicorn main:app --reload
-```
-
-API available at `http://127.0.0.1:8000`
-
-Interactive docs: `http://127.0.0.1:8000/docs`
+| Service    | URL                          |
+|------------|------------------------------|
+| API        | http://localhost:8000        |
+| API Docs   | http://localhost:8000/docs   |
+| Metrics    | http://localhost:8000/metrics|
+| Prometheus | http://localhost:9090        |
+| Grafana    | http://localhost:3000        |
 
 ## Endpoints
 
-| Method | URL | Description |
-|--------|-----|-------------|
-| GET | /tasks | Get all tasks |
-| POST | /tasks | Create a task |
-| GET | /tasks/{id} | Get task by ID |
-| PUT | /tasks/{id} | Mark task as done |
-| DELETE | /tasks/{id} | Delete task |
+| Method | URL            | Description       |
+|--------|----------------|-------------------|
+| GET    | /tasks         | Get all tasks     |
+| POST   | /tasks         | Create a task     |
+| GET    | /tasks/{id}    | Get task by ID    |
+| PUT    | /tasks/{id}    | Mark task as done |
+| DELETE | /tasks/{id}    | Delete task       |
 
 ## Deployment
 
