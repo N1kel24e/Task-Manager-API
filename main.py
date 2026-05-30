@@ -3,9 +3,12 @@ from fastapi import HTTPException
 from pydantic import BaseModel
 from motor.motor_asyncio import AsyncIOMotorClient
 from bson import ObjectId
-app = FastAPI()
+from prometheus_fastapi_instrumentator import Instrumentator
 
-client = AsyncIOMotorClient("mongodb://localhost:27017")
+app = FastAPI()
+Instrumentator().instrument(app).expose(app)
+
+client = AsyncIOMotorClient("mongodb://mongo:27017")
 db = client.taskdb
 collection = db.tasks
 
